@@ -1,0 +1,10 @@
+.array-values {
+    display: flex;
+}
+.section-array {
+    border: 1px solid #61dafb;
+    padding: 10px;
+}
+.length-array > .section-array {
+    background: #ffd200;
+}
