@@ -9,6 +9,7 @@ import ViewLongNumber from "./ViewLongNumber";
 import Less from "../../functions/long_numbers/less";
 import More_Eq from "../../functions/long_numbers/more_eq";
 import Less_Eq from "../../functions/long_numbers/less_eq";
+import More_Sdvig from "../../functions/long_numbers/more_sdvig";
 
 export default function JustView() {
     let [stringC,setStringC] = useState<string>();
@@ -18,6 +19,7 @@ export default function JustView() {
     let [varMoreEq,setVarMoreEq] = useState<boolean>(false);
     let [varLess,setVarLess] = useState<boolean>(false);
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
+    let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
     const osn = 10000;
     const strA = '870613029451';
     const strB = '3475912100517461';
@@ -28,6 +30,8 @@ export default function JustView() {
 
     const strMoreA = '3476782713546912';
     const strMoreB = '3476082713546912';
+
+
     function summFunction() {
         let arrA = ReadLongF(strA,osn)[0];
         console.log(arrA,'arrA');
@@ -73,6 +77,15 @@ export default function JustView() {
         setVarLessEq(lessEq);
     }
 
+    const strMoreSdvigA = /*'567000';*//*'56784';*/'634000';
+    const strMoreSdvigB = /*'567';*/'634';/*'567';*/
+    function more_sdvig() {
+        let arrA = ReadLongF(strMoreSdvigA,10)[0];
+        let arrB = ReadLongF(strMoreSdvigB,10)[0];
+        let moreSdvig = More_Sdvig(arrA,arrB,1,3);
+        setVarMoreSdvig(moreSdvig);
+    }
+
     useEffect(()=>{
         let strC = summFunction();
         setStringC(strC);
@@ -81,6 +94,7 @@ export default function JustView() {
         less();
         more_eq();
         less_eq();
+        more_sdvig();
 
     },[]);
 
@@ -105,6 +119,8 @@ export default function JustView() {
                 <li>strMoreA `{'>='}` strMoreB: {varMoreEq ? 'true' : 'false' }</li>
                 <li>strMoreA `{'<'}` strMoreB: {varLess ? 'true' : 'false' }</li>
                 <li>strMoreA `{'<='}` strMoreB: {varLessEq ? 'true' : 'false' }</li>
+                <li><hr/></li>
+                <li>strMoreSdvigA:{strMoreSdvigA} `{'<'}` strMoreSdvigB:{strMoreSdvigB} = {varMoreSdvig}</li>
             </ul>
         </div>
     );
