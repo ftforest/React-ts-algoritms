@@ -1,45 +1,7 @@
 import ReadLongF from "../../functions/long_numbers/read_long";
 import {useEffect, useState} from "react";
 import './ReadLong.css';
-
-function Section({ number } : { number: number}) {
-    return (
-        <div className="section-array">
-            {number}
-        </div>
-    )
-}
-function ListDebug({ list } : { list: any[]}) {
-    const listItems = list.map((value,index) => {
-            return (
-                <ListLongNumber key={index} list={value}/>
-            );
-        }
-    );
-    return (
-        <div className="list-array-values">{listItems}</div>
-    );
-}
-function ListLongNumber({ list } : { list: number[]}) {
-    //const numbers = props.list;
-    const listItems = list.map((value,index) => {
-        if (index == 0) {
-            return (
-                <span key={index} className="length-array">
-                    <Section  number={value}/>
-                </span>
-            );
-        } else {
-            return (
-                <Section key={index} number={value}/>
-            );
-        }
-    }
-);
-    return (
-        <div className="array-values">{listItems}</div>
-    );
-}
+import ListDebugLongNumbers from "../HelpComponents/ListDebugLongNumbers";
 
 export default function ReadLong({ stringNumber,parentCallback }: { stringNumber: string,parentCallback:any }) {
     const [numberFinel, setNumberFinel] = useState<number[]>([]);
@@ -78,7 +40,7 @@ export default function ReadLong({ stringNumber,parentCallback }: { stringNumber
                 <input type="text" defaultValue={stringNumber} name="numberLong"/>
                 <button type="submit">Read long number</button>
 
-                <ListDebug list={numberFinel}/>
+                <ListDebugLongNumbers list={numberFinel}/>
                 {/*<button onClick={addFive}>Add 5</button>*/}
             </form>
         </div>
