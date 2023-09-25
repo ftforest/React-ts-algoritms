@@ -3,14 +3,31 @@ import ReadLongF from "../../functions/long_numbers/read_long";
 import WriteLongF from "../../functions/long_numbers/write_long";
 import {useEffect, useState} from "react";
 import ListDebugLongNumbers from "./ListDebugLongNumbers";
+import Eq from "../../functions/long_numbers/eg";
+import More from "../../functions/long_numbers/more";
+import ViewLongNumber from "./ViewLongNumber";
+import Less from "../../functions/long_numbers/less";
+import More_Eq from "../../functions/long_numbers/more_eq";
+import Less_Eq from "../../functions/long_numbers/less_eq";
 
 export default function JustView() {
     let [stringC,setStringC] = useState<string>();
     let [arrayC,setArrayC] = useState<number[]>([]);
+    let [varEq,setVarEq] = useState<boolean>(false);
+    let [varMore,setVarMore] = useState<boolean>(false);
+    let [varMoreEq,setVarMoreEq] = useState<boolean>(false);
+    let [varLess,setVarLess] = useState<boolean>(false);
+    let [varLessEq,setVarLessEq] = useState<boolean>(false);
     const osn = 10000;
-    let strA = '870613029451';
-    let strB = '3475912100517461';
-    let strC = '3476782713546912';
+    const strA = '870613029451';
+    const strB = '3475912100517461';
+    const strC = '3476782713546912';
+
+    const strEqA = '3476782713546912';
+    const strEqB = '3476782713546912';
+
+    const strMoreA = '3476782713546912';
+    const strMoreB = '3476082713546912';
     function summFunction() {
         let arrA = ReadLongF(strA,osn)[0];
         console.log(arrA,'arrA');
@@ -24,9 +41,47 @@ export default function JustView() {
         return resultStrC;
     }
 
+    function eq() {
+        let arrA = ReadLongF(strEqA,osn)[0];
+        let arrB = ReadLongF(strEqB,osn)[0];
+        let eq = Eq(arrA,arrB,osn);
+        setVarEq(eq);
+    }
+
+    function more() {
+        let arrA = ReadLongF(strMoreA,osn)[0];
+        let arrB = ReadLongF(strMoreB,osn)[0];
+        let more = More(arrA,arrB,osn);
+        setVarMore(more);
+    }
+    function less() {
+        let arrA = ReadLongF(strMoreA,osn)[0];
+        let arrB = ReadLongF(strMoreB,osn)[0];
+        let less = Less(arrA,arrB,osn);
+        setVarLess(less);
+    }
+    function more_eq() {
+        let arrA = ReadLongF(strMoreA,osn)[0];
+        let arrB = ReadLongF(strMoreB,osn)[0];
+        let moreEq = More_Eq(arrA,arrB,osn);
+        setVarMoreEq(moreEq);
+    }
+    function less_eq() {
+        let arrA = ReadLongF(strMoreA,osn)[0];
+        let arrB = ReadLongF(strMoreB,osn)[0];
+        let lessEq = Less_Eq(arrA,arrB,osn);
+        setVarLessEq(lessEq);
+    }
+
     useEffect(()=>{
         let strC = summFunction();
         setStringC(strC);
+        eq();
+        more();
+        less();
+        more_eq();
+        less_eq();
+
     },[]);
 
     return (
@@ -37,7 +92,19 @@ export default function JustView() {
                 <li>strC: {strC}</li>
                 <li>strR: {stringC}</li>
                 <li>strC == resultStrC: {strC == stringC}</li>
-                <ListDebugLongNumbers list={arrayC}/>
+                <li><ListDebugLongNumbers list={arrayC}/></li>
+                <li>strEqA: {strEqA}</li>
+                <li>strEqB: {strEqB}</li>
+                <li>strEqA = strEqB: {varEq ? 'true' : 'false' }</li>
+                <ViewLongNumber title="" stringNumber={strEqA} osn={osn}/>
+                <ViewLongNumber title="strMoreA" stringNumber={strMoreA} osn={osn}/>
+                <ViewLongNumber title="strMoreB" stringNumber={strMoreB} osn={osn}/>
+                <li>strMoreA: {strMoreA}</li>
+                <li>strMoreB: {strMoreB}</li>
+                <li>strMoreA `{'>'}` strMoreB: {varMore ? 'true' : 'false' }</li>
+                <li>strMoreA `{'>='}` strMoreB: {varMoreEq ? 'true' : 'false' }</li>
+                <li>strMoreA `{'<'}` strMoreB: {varLess ? 'true' : 'false' }</li>
+                <li>strMoreA `{'<='}` strMoreB: {varLessEq ? 'true' : 'false' }</li>
             </ul>
         </div>
     );
