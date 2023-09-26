@@ -10,8 +10,10 @@ import Less from "../../functions/long_numbers/less";
 import More_Eq from "../../functions/long_numbers/more_eq";
 import Less_Eq from "../../functions/long_numbers/less_eq";
 import More_Sdvig from "../../functions/long_numbers/more_sdvig";
+import Mult from "../../functions/long_numbers/mul";
 
 export default function JustView() {
+    const osn = 10000;
     let [stringC,setStringC] = useState<string>();
     let [arrayC,setArrayC] = useState<number[]>([]);
     let [varEq,setVarEq] = useState<boolean>(false);
@@ -20,7 +22,28 @@ export default function JustView() {
     let [varLess,setVarLess] = useState<boolean>(false);
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
     let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
-    const osn = 10000;
+    interface IData {
+        mult: {
+            strNumLongA: string,
+            numArrayA: number[],
+            numNumB: number,
+            osn: number,
+            numArrayC: number[]
+            strNumLongС: string,
+        };
+    }
+    const [dataView, setDataView] = useState<IData>({
+        mult: {
+            strNumLongA: '11110000',
+            numArrayA: [],
+            numNumB: 3,
+            osn:osn,
+            numArrayC: [],
+            strNumLongС: '',
+        }
+    });
+
+
     const strA = '870613029451';
     const strB = '3475912100517461';
     const strC = '3476782713546912';
@@ -85,6 +108,27 @@ export default function JustView() {
         let moreSdvig = More_Sdvig(arrA,arrB,1,3);
         setVarMoreSdvig(moreSdvig);
     }
+    function mult(){
+        let multData = {
+            strNumLongA: '111100005000',
+            numArrayA: [],
+            numNumB: 6,
+            osn:osn,
+            numArrayC: [0],
+            strNumLongС: '',
+        };
+        multData.numArrayA = ReadLongF(multData.strNumLongA,multData.osn)[0];
+        multData.numArrayC = Mult(multData.numArrayA,multData.numNumB,multData.osn);
+
+        multData.strNumLongС = WriteLongF(multData.numArrayC,multData.osn)
+        let dataViewCopy = dataView;
+        dataViewCopy.mult = multData;
+        setDataView(dataViewCopy)
+        // debug
+        console.log(dataView.mult.numArrayA,'numArrayA')
+        console.log(dataView.mult.numArrayC,'numArrayC')
+        console.log(dataView.mult.strNumLongС,'strNumLongС')
+    }
 
     useEffect(()=>{
         let strC = summFunction();
@@ -95,12 +139,13 @@ export default function JustView() {
         more_eq();
         less_eq();
         more_sdvig();
+        mult();
 
     },[]);
 
     return (
         <div>
-            <ul>
+            <ul className="ul-view-result">
                 <li>strA: {strA}</li>
                 <li>strB: {strB}</li>
                 <li>strC: {strC}</li>
@@ -121,6 +166,8 @@ export default function JustView() {
                 <li>strMoreA `{'<='}` strMoreB: {varLessEq ? 'true' : 'false' }</li>
                 <li><hr/></li>
                 <li>strMoreSdvigA:{strMoreSdvigA} `{'<'}` strMoreSdvigB:{strMoreSdvigB} = {varMoreSdvig}</li>
+                <ViewLongNumber title="dataView.mult.strNumLongС" stringNumber={dataView.mult.strNumLongС} osn={osn}/>
+                <li><span>Mult:|:</span>strNumLongA:{dataView.mult.strNumLongA} * numNumB:{dataView.mult.numNumB} = <b>{dataView.mult.strNumLongС}</b></li>
             </ul>
         </div>
     );

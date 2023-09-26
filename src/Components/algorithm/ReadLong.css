@@ -8,3 +8,6 @@
 .length-array > .section-array {
     background: #ffd200;
 }
+.ul-view-result > li > span {
+    color: #ffd200;
+}
