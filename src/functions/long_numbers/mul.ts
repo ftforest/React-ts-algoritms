@@ -1,6 +1,6 @@
 import FillZero from "./fill_zero";
 
-export default function Mult(A:number[],K:number,osn:number):number[] {
+export default function Mul(A:number[],K:number,osn:number):number[] {
     let C:number[] = [];
     C = FillZero(A[0]);
     console.log(C,'C')
