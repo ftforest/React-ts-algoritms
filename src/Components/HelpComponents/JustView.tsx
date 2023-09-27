@@ -11,6 +11,10 @@ import More_Eq from "../../functions/long_numbers/more_eq";
 import Less_Eq from "../../functions/long_numbers/less_eq";
 import More_Sdvig from "../../functions/long_numbers/more_sdvig";
 import Mul from "../../functions/long_numbers/mul";
+import MulLong from "../../functions/long_numbers/mul_long";
+import IBaseLongNumberData from "../../functions/interfase/IBaseLongNumberData";
+import IDataLongMetods from "../../functions/interfase/IDataLongMetods";
+import {magicMethod} from "../../functions/help/magic_method";
 
 export default function JustView() {
     const osn = 10000;
@@ -22,26 +26,28 @@ export default function JustView() {
     let [varLess,setVarLess] = useState<boolean>(false);
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
     let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
-    interface IData {
-        mul: {
-            strNumLongA: string,
-            numArrayA: number[],
-            numNumB: number,
-            osn: number,
-            numArrayC: number[]
-            strNumLongС: string,
-        };
+
+    
+    let baseDefault: IBaseLongNumberData = {
+        strNumLongA: '',
+        strNumLongB: '',
+        strNumLongC: '',
+        strNumShortB: 0,
+        numArrayA: [],
+        numArrayB: [],
+        numArrayC: [],
+        osn: 0,
+        nameF: '',
+        sp: 0,
+        params: [],
+        resultStr: 0, // 0 - string, 1 - LongArray, 2 - [string,LongArray]
     }
-    const [dataView, setDataView] = useState<IData>({
-        mul: {
-            strNumLongA: '11110000',
-            numArrayA: [],
-            numNumB: 3,
-            osn:osn,
-            numArrayC: [],
-            strNumLongС: '',
-        }
-    });
+    let dataDefault: IDataLongMetods = {
+        mul: baseDefault,
+        mulLong: baseDefault,
+        sub: baseDefault,
+    };
+    const [dataView, setDataView] = useState<IDataLongMetods>(dataDefault);
 
 
     const strA = '870613029451';
@@ -109,26 +115,94 @@ export default function JustView() {
         setVarMoreSdvig(moreSdvig);
     }
     function mul(){
-        let multData = {
-            strNumLongA: '111100005000',
-            numArrayA: [],
-            numNumB: 6,
-            osn:osn,
-            numArrayC: [0],
-            strNumLongС: '',
-        };
-        multData.numArrayA = ReadLongF(multData.strNumLongA,multData.osn)[0];
-        multData.numArrayC = Mul(multData.numArrayA,multData.numNumB,multData.osn);
 
-        multData.strNumLongС = WriteLongF(multData.numArrayC,multData.osn)
-        let dataViewCopy = dataView;
-        dataViewCopy.mul = multData;
-        setDataView(dataViewCopy)
+        let mulData = baseDefault;
+        mulData.strNumLongA = '111100005000';
+        mulData.strNumShortB = 6;
+        mulData.osn = osn;
+
+        mulData.numArrayA = ReadLongF(mulData.strNumLongA,mulData.osn)[0];
+        mulData.numArrayC = Mul(mulData.numArrayA,mulData.strNumShortB,mulData.osn);
+
+        mulData.strNumLongC = WriteLongF(mulData.numArrayC,mulData.osn)
+        /*const dataViewCopy:IDataLongMetods = {...dataView};
+        dataViewCopy.mul = mulData;*/
+        dataView.mul = mulData;
+        setDataView(dataView)
         // debug
         console.log(dataView.mul.numArrayA,'numArrayA')
         console.log(dataView.mul.numArrayC,'numArrayC')
-        console.log(dataView.mul.strNumLongС,'strNumLongС')
+        console.log(dataView.mul.strNumLongC,'strNumLongC')
+
+        console.log(dataView,'dataView')
+
     }
+
+    function mule_long () {
+        let mulLong = {...baseDefault};
+        mulLong.strNumLongA = '11110';
+        mulLong.strNumLongB = '11110';
+        mulLong.osn = osn;
+        mulLong.numArrayC = [0];
+
+
+        let numArrA = ReadLongF(mulLong.strNumLongA,mulLong.osn)[0];
+        let numArrB = ReadLongF(mulLong.strNumLongA,mulLong.osn)[0];
+        let numArrC = MulLong(numArrA,numArrB,mulLong.osn);
+        mulLong.numArrayA = numArrA;
+        mulLong.numArrayB = numArrB;
+        mulLong.numArrayC = numArrC;
+        mulLong.strNumLongC = WriteLongF(numArrC,mulLong.osn);
+        dataView.mulLong = mulLong;
+        setDataView(dataView)
+        console.log(numArrC,'numArrC vvvvvv')
+    }
+    function mule_long_2 () {
+        let data:IBaseLongNumberData = {
+            strNumLongA: '11110',
+            strNumLongB: '10000',
+            strNumLongC: '',
+            strNumShortB: 0,
+            numArrayA: [],
+            numArrayB: [],
+            numArrayC: [0],
+            osn: osn,
+            nameF: 'MulLong',
+            sp: 0,
+            params: ['numArrayA','numArrayB'],
+            resultStr: 2,
+        }
+        data.strNumLongC = magicMethod(data)[0];
+        data.numArrayC = magicMethod(data)[1];
+        dataView.mulLong = data;
+        setDataView(dataView)
+
+        console.log(data,'data')
+    }
+    function sub () {
+
+        let data:IBaseLongNumberData = {
+            strNumLongA: '10000000',
+            strNumLongB: '90000',
+            strNumLongC: '',
+            strNumShortB: 0,
+            numArrayA: [],
+            numArrayB: [],
+            numArrayC: [],
+            osn: osn,
+            nameF: 'Sub',
+            sp: 0,
+            params: ['numArrayA','numArrayB'],
+            resultStr: 2,
+        }
+        let res = magicMethod(data);
+        console.log(res,'res')
+        data.strNumLongC = magicMethod(data)[0];
+        dataView.sub = data;
+        setDataView(dataView)
+    }
+
+
 
     useEffect(()=>{
         let strC = summFunction();
@@ -140,6 +214,9 @@ export default function JustView() {
         less_eq();
         more_sdvig();
         mul();
+        //mule_long();
+        mule_long_2();
+        sub();
 
     },[]);
 
@@ -166,8 +243,16 @@ export default function JustView() {
                 <li>strMoreA `{'<='}` strMoreB: {varLessEq ? 'true' : 'false' }</li>
                 <li><hr/></li>
                 <li>strMoreSdvigA:{strMoreSdvigA} `{'<'}` strMoreSdvigB:{strMoreSdvigB} = {varMoreSdvig}</li>
-                <ViewLongNumber title="dataView.mult.strNumLongС" stringNumber={dataView.mul.strNumLongС} osn={osn}/>
-                <li><span>Mult:|:</span>strNumLongA:{dataView.mul.strNumLongA} * numNumB:{dataView.mul.numNumB} = <b>{dataView.mul.strNumLongС}</b></li>
+                {dataView && dataView.mul && (
+                <li>
+                    <span>Mul:|:</span>strNumLongA:{dataView.mul.strNumLongA} * strNumShortB:{dataView.mul.strNumShortB} = <b>{dataView.mul.strNumLongC}</b>
+                    <ViewLongNumber title="dataView.mul.strNumLongC" stringNumber={dataView.mul.strNumLongC} osn={osn}/>
+                </li>
+                )}
+                <li><span>MulLong:|:</span>strNumLongA:{dataView.mulLong.strNumLongA} * strNumShortB:{dataView.mulLong.strNumLongB} = <b>{dataView.mulLong.strNumLongC}</b></li>
+                <ViewLongNumber title="dataView.mulLong.strNumLongC" stringNumber={dataView.mulLong.strNumLongC} osn={dataView.mulLong.osn}/>
+                <li><span>Sub:|:</span>strNumLongA:{dataView.sub.strNumLongA} - strNumLongB:{dataView.sub.strNumLongB} = <b>{dataView.sub.strNumLongC}</b></li>
+                <li><ViewLongNumber title="dataView.sub.strNumLongC" stringNumber={dataView.sub.strNumLongC} osn={dataView.sub.osn}/></li>
             </ul>
         </div>
     );

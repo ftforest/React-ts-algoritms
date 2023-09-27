@@ -41,8 +41,10 @@ export default function ViewLongNumber({ stringNumber , osn, title} : { stringNu
     );
     return (
         <div className="list-array-values">
+            <hr/>
             <span>{title}: {stringNumber}</span><br/>
             {listItems}
+            <hr/>
         </div>
     );
 }
