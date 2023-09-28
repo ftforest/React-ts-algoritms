@@ -1,8 +1,8 @@
-export default function ReadLongF( numberString: string, numberOsn:number = 1000/*,callback = (val:any) => console.log(val)*/) : any{
+export default function ReadLongF( numberString: string, numberOsn:number = 1000/*,callback = (val:any) => */) : any{
     //numberString = '2030851670';
-    //console.log(numberString,'numberString');
+
     const numberLength = numberString.length;
-    //console.log(numberLength,'numberLength');
+
     let A: number[] = [0];
     let DebugA: any[] = [];
     let i:number;
@@ -13,7 +13,7 @@ export default function ReadLongF( numberString: string, numberOsn:number = 1000
         if (y === '0') val = 1;
         return x + val;
     }, 0);
-    //console.log('countZeros',countZeros);
+
     //debugger
 
     for (j = 0;j < numberLength;j++) {
@@ -30,11 +30,11 @@ export default function ReadLongF( numberString: string, numberOsn:number = 1000
             item.push(A[k])
         }
         DebugA.push(item);
-        //console.log(A,'A');
+
         //callback(A);
     }
     if (A[A[0]] == 0) A.pop();
-    console.log(A,'A Final:');
-    //console.log(DebugA,'DebugA:');
+
+
     return [A,DebugA];
 }

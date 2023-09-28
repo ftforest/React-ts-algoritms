@@ -4,6 +4,8 @@ import ReadLongF from "../long_numbers/read_long";
 import More_Sdvig from "../long_numbers/more_sdvig";
 import MulLong from "../long_numbers/mul_long";
 import WriteLongF from "../long_numbers/write_long";
+import LongDivLong from "../long_numbers/long_div_long";
+import {validateHeaderValue} from "http";
 
 
 
@@ -18,6 +20,7 @@ export function magicMethod(data: IBaseLongNumberData) {
         switch ( val ) {
             case 'numArrayA':
                 A = ReadLongF(data.strNumLongA, osn)[0];
+
                 break;
             case 'numArrayB':
                 B = ReadLongF(data.strNumLongB, osn)[0];
@@ -35,6 +38,10 @@ export function magicMethod(data: IBaseLongNumberData) {
         case 'Sub':
             resultFunction = Sub(A,B,osn,sp);
             break;
+        case 'LongDivLong':
+            resultFunction = LongDivLong(A,B,osn);
+
+            break;
 
         default:
             //
@@ -47,7 +54,7 @@ export function magicMethod(data: IBaseLongNumberData) {
     }else if (data.resultStr == 2) { // [string,LongArray]
         return [WriteLongF(resultFunction,osn),resultFunction];
     }
-    console.log(resultFunction,'resultFunction');
+
 }
 
 /*

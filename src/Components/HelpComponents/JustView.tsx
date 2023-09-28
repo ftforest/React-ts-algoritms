@@ -15,6 +15,8 @@ import MulLong from "../../functions/long_numbers/mul_long";
 import IBaseLongNumberData from "../../functions/interfase/IBaseLongNumberData";
 import IDataLongMetods from "../../functions/interfase/IDataLongMetods";
 import {magicMethod} from "../../functions/help/magic_method";
+import copyDataLongParamsObj from "../../functions/help/copy_data_long_params_obj";
+import Sub from "../../functions/long_numbers/sub";
 
 export default function JustView() {
     const osn = 10000;
@@ -41,11 +43,13 @@ export default function JustView() {
         sp: 0,
         params: [],
         resultStr: 0, // 0 - string, 1 - LongArray, 2 - [string,LongArray]
+        data:{}
     }
     let dataDefault: IDataLongMetods = {
         mul: baseDefault,
         mulLong: baseDefault,
         sub: baseDefault,
+        longDivLong: baseDefault,
     };
     const [dataView, setDataView] = useState<IDataLongMetods>(dataDefault);
 
@@ -63,11 +67,11 @@ export default function JustView() {
 
     function summFunction() {
         let arrA = ReadLongF(strA,osn)[0];
-        console.log(arrA,'arrA');
+        ;
         let arrB = ReadLongF(strB,osn)[0];
-        console.log(arrA,arrB,'arrA arrB');
+        ;
         let arrC = SumLongTwoF(arrA,arrB,osn);
-        console.log(arrC,'arrC');
+        ;
         let arr:any[] = [arrA,arrB,arrC];
         setArrayC(arr);
         const resultStrC = WriteLongF(arrC,osn);
@@ -116,7 +120,7 @@ export default function JustView() {
     }
     function mul(){
 
-        let mulData = baseDefault;
+        let mulData = {...baseDefault};
         mulData.strNumLongA = '111100005000';
         mulData.strNumShortB = 6;
         mulData.osn = osn;
@@ -130,11 +134,11 @@ export default function JustView() {
         dataView.mul = mulData;
         setDataView(dataView)
         // debug
-        console.log(dataView.mul.numArrayA,'numArrayA')
-        console.log(dataView.mul.numArrayC,'numArrayC')
-        console.log(dataView.mul.strNumLongC,'strNumLongC')
 
-        console.log(dataView,'dataView')
+
+
+
+
 
     }
 
@@ -155,7 +159,7 @@ export default function JustView() {
         mulLong.strNumLongC = WriteLongF(numArrC,mulLong.osn);
         dataView.mulLong = mulLong;
         setDataView(dataView)
-        console.log(numArrC,'numArrC vvvvvv')
+
     }
     function mule_long_2 () {
         let data:IBaseLongNumberData = {
@@ -171,13 +175,14 @@ export default function JustView() {
             sp: 0,
             params: ['numArrayA','numArrayB'],
             resultStr: 2,
+            data:{},
         }
         data.strNumLongC = magicMethod(data)[0];
         data.numArrayC = magicMethod(data)[1];
         dataView.mulLong = data;
         setDataView(dataView)
 
-        console.log(data,'data')
+
     }
     function sub () {
 
@@ -194,11 +199,43 @@ export default function JustView() {
             sp: 0,
             params: ['numArrayA','numArrayB'],
             resultStr: 2,
+            data: {},
         }
         let res = magicMethod(data);
-        console.log(res,'res')
-        data.strNumLongC = magicMethod(data)[0];
+
+        data.strNumLongC = res[0];
         dataView.sub = data;
+        setDataView(dataView)
+    }
+    function long_div_long () {
+
+        let dataHalf = {
+            strNumLongA: '564',
+            strNumLongB: '63',
+            osn: 10,
+            nameF: 'LongDivLong',
+            sp: 0,
+            params: ['numArrayA','numArrayB'],
+            resultStr: 2,
+            data: {
+                ost: '',
+                full: '',
+            }
+        }
+
+        let data = copyDataLongParamsObj(baseDefault,dataHalf);
+
+
+        let res = magicMethod(data);
+
+        data.strNumLongC = res[0];
+
+        let ResOut = MulLong(ReadLongF(data.strNumLongB)[0],res[1],osn);
+        let OstOut = Sub(ReadLongF(data.strNumLongA)[0],ResOut,osn);
+        data.data.ost = WriteLongF(OstOut,osn);
+        data.data.full = WriteLongF(ResOut,osn);
+
+        dataView.longDivLong = data;
         setDataView(dataView)
     }
 
@@ -217,6 +254,7 @@ export default function JustView() {
         //mule_long();
         mule_long_2();
         sub();
+        long_div_long();
 
     },[]);
 
@@ -253,6 +291,7 @@ export default function JustView() {
                 <ViewLongNumber title="dataView.mulLong.strNumLongC" stringNumber={dataView.mulLong.strNumLongC} osn={dataView.mulLong.osn}/>
                 <li><span>Sub:|:</span>strNumLongA:{dataView.sub.strNumLongA} - strNumLongB:{dataView.sub.strNumLongB} = <b>{dataView.sub.strNumLongC}</b></li>
                 <li><ViewLongNumber title="dataView.sub.strNumLongC" stringNumber={dataView.sub.strNumLongC} osn={dataView.sub.osn}/></li>
+                <li><span>LongDivLong:|:</span>strNumLongA:{dataView.longDivLong.strNumLongA} - strNumLongB:{dataView.longDivLong.strNumLongB} = <b>{dataView.longDivLong.strNumLongC} (Ost:{dataView.longDivLong.data.ost},Full:{dataView.longDivLong.data.full})</b></li>
             </ul>
         </div>
     );

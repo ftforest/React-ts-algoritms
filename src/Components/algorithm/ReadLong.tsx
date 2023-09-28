@@ -19,16 +19,16 @@ export default function ReadLong({ stringNumber,parentCallback }: { stringNumber
 
         // Or you can work with it as a plain object:
         const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson.numberLong);
+
         let arrayFinel = ReadLongF(formJson.numberLong.toString());
-        //console.log(arrayFinel,'arrayFinel');
+        //
         setNumberFinel([...arrayFinel[1]]);
         parentCallback(arrayFinel[0]);
     }
 
     useEffect(()=>{
         let arrayFinel = ReadLongF(stringNumber);
-        //console.log(arrayFinel,'arrayFinel');
+        //;
         setNumberFinel([...arrayFinel[1]]);
     },[]);
 

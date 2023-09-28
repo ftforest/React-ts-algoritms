@@ -11,7 +11,7 @@ function App() {
     let [numInArray,setNumInArray] = useState<number[]>([]);
     let handleCallback = (childData:number[]) => {
         setNumInArray(childData );
-        console.log(childData,'childData')
+
     }
   return (
     <div className="App">

@@ -1,14 +1,14 @@
 import More_Sdvig from "./more_sdvig";
 import Mul from "./mul";
 import Sub from "./sub";
+import MulLong from "./mul_long";
 
-export default function LongDivLong (A:number[],B:number[],osn:number = 10000):number[][] {
+export default function LongDivLong (A:number[],B:number[],osn:number = 10000):number[] {
     let Res:number[] = [1];
     let Ost:number[] = [1];
-    let ResOst:number[][];
     switch ( More_Sdvig(A,B,osn,0) ) {
         case 0:
-            ResOst = MakeDel(A,B,Res,Ost,osn)
+            Res = MakeDel(A,B,osn)
             break;
         case 1:
             Ost = A;
@@ -20,13 +20,14 @@ export default function LongDivLong (A:number[],B:number[],osn:number = 10000):n
             //
             break;
     }
-    ResOst = [Res,Ost];
-    return ResOst;
+    return Res;
 }
 
-function MakeDel (A:number[],B:number[],Res:number[],Ost:number[],osn:number):number[][] {
+function MakeDel (A:number[],B:number[],osn:number):number[] {
+    let Res:number[] = [1];
+    let Ost:number[];
     let sp:number = 0;
-    Ost = A;
+    Ost = [...A];
     sp = A[0] - B[0];
     if (More_Sdvig(A,B,osn,sp) == 1) sp--;
     Res[0] = sp + 1;
@@ -34,7 +35,8 @@ function MakeDel (A:number[],B:number[],Res:number[],Ost:number[],osn:number):nu
         Res[sp + 1] = FindBin(Ost,B,sp,osn);
         sp--;
     }
-    return [Res,Ost];
+
+    return Res;
 }
 
 function FindBin (Ost:number[],B:number[],sp:number,osn:number):number  {

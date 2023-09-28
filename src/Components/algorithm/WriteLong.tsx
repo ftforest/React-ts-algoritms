@@ -7,7 +7,7 @@ export default function WriteLong({longNumber}:{longNumber:number[]}) {
 
     function calculater() {
         //let longNumber = ReadLongF('120345678');
-        //console.log('longNumber')
+        //
         let numberInDisplay = WriteLongF(longNumber);
         setNumToString(numberInDisplay);
     }
