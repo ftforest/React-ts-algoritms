@@ -6,6 +6,9 @@ import MulLong from "../long_numbers/mul_long";
 import WriteLongF from "../long_numbers/write_long";
 import LongDivLong from "../long_numbers/long_div_long";
 import {validateHeaderValue} from "http";
+import LongTurnShort from "../long_numbers/long_turn_short";
+import LongModShort from "../long_numbers/long_mod_short";
+import HowDigits from "../long_numbers/how_digits";
 
 
 
@@ -30,7 +33,7 @@ export function magicMethod(data: IBaseLongNumberData):any {
                 break;
         }
     });
-    let resultFunction:number[] = [];
+    let resultFunction:any;
     switch ( data.nameF ) {
         case 'MulLong':
             resultFunction = MulLong(A,B,osn);
@@ -40,7 +43,15 @@ export function magicMethod(data: IBaseLongNumberData):any {
             break;
         case 'LongDivLong':
             resultFunction = LongDivLong(A,B,osn);
-
+            break;
+        case 'LongTurnShort':
+            resultFunction = LongTurnShort(A,osn);
+            break;
+        case 'LongModShort':
+            resultFunction = LongModShort(A,shortB,osn);
+            break;
+        case 'HowDigits':
+            resultFunction = HowDigits(A,osn);
             break;
 
         default:
@@ -52,6 +63,10 @@ export function magicMethod(data: IBaseLongNumberData):any {
     }else if (data.resultStr == 1) { // LongArray
         return resultFunction;
     }else if (data.resultStr == 2) { // [string,LongArray]
+        if (typeof resultFunction === "number" ) {
+            let resArr = ReadLongF(resultFunction.toString(), osn)[0];
+            return [resultFunction.toString(),resArr];
+        }
         return [WriteLongF(resultFunction,osn),resultFunction];
     }
     return data;

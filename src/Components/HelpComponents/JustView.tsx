@@ -18,6 +18,9 @@ import {magicMethod} from "../../functions/help/magic_method";
 import copyDataLongParamsObj from "../../functions/help/copy_data_long_params_obj";
 import Sub from "../../functions/long_numbers/sub";
 import {DivOstFull, DivOstFull2} from "../../functions/type/DivOstFull";
+import LongTurnShort from "../../functions/long_numbers/long_turn_short";
+import LongModShort from "../../functions/long_numbers/long_mod_short";
+import HowDigits from "../../functions/long_numbers/how_digits";
 
 export default function JustView() {
     const osn = 10000;
@@ -51,7 +54,7 @@ export default function JustView() {
         nameF: '',
         sp: 0,
         params: [],
-        resultStr: 0, // 0 - string, 1 - LongArray, 2 - [string,LongArray]
+        resultStr: 2, // 0 - string, 1 - LongArray, 2 - [string,LongArray]
         data: allUnionDataAttr//objectsMerge(divOstFullDefault,obj)
     }
 
@@ -60,6 +63,9 @@ export default function JustView() {
         mulLong: baseDefault,
         sub: baseDefault,
         longDivLong: baseDefault,
+        longTurnShort: baseDefault,
+        longModShort: baseDefault,
+        howDigits: baseDefault,
     };
     const [dataView, setDataView] = useState<IDataLongMetods>(dataDefault);
 
@@ -144,12 +150,6 @@ export default function JustView() {
         dataView.mul = mulData;
         setDataView(dataView)
         // debug
-
-
-
-
-
-
     }
 
     function mule_long () {
@@ -249,6 +249,51 @@ export default function JustView() {
         setDataView(dataView)
     }
     function long_turn_short() {
+        let dataHalf = {
+            strNumLongA: '123456789',
+            osn: osn,
+            nameF: 'LongTurnShort',
+            params: ['numArrayA'],
+        }
+
+        let data = copyDataLongParamsObj(baseDefault,dataHalf);
+        let res = magicMethod(data);
+        data.strNumLongC = res[0];
+
+        dataView.longTurnShort = data;
+        setDataView(dataView)
+    }
+    function long_mod_short() {
+        let dataHalf = {
+            strNumLongA: '8',
+            strNumShortB: '9',
+            osn: osn,
+            nameF: 'LongModShort',
+            params: ['numArrayA'],
+        }
+
+        let data = copyDataLongParamsObj(baseDefault,dataHalf);
+        let res = magicMethod(data);
+        data.strNumLongC = res[0];
+
+        dataView.longModShort = data;
+        setDataView(dataView)
+    }
+    function how_digits() {
+        let dataHalf = {
+            strNumLongA: '12345678900',
+            osn: osn,
+            nameF: 'HowDigits',
+            params: ['numArrayA'],
+        }
+
+        let data = copyDataLongParamsObj(baseDefault,dataHalf);
+        let res = magicMethod(data);
+        data.strNumLongC = res[0];
+        console.log(res[0],res[1],'res[0],res[1]')
+
+        dataView.howDigits = data;
+        setDataView(dataView)
         console.log(dataView,'dataView')
     }
 
@@ -267,6 +312,8 @@ export default function JustView() {
         sub();
         long_div_long();
         long_turn_short();
+        long_mod_short();
+        how_digits();
 
     },[]);
 
@@ -304,6 +351,8 @@ export default function JustView() {
                 <li><span>Sub:|:</span>strNumLongA:{dataView.sub.strNumLongA} - strNumLongB:{dataView.sub.strNumLongB} = <b>{dataView.sub.strNumLongC}</b></li>
                 <li><ViewLongNumber title="dataView.sub.strNumLongC" stringNumber={dataView.sub.strNumLongC} osn={dataView.sub.osn}/></li>
                 <li><span>LongDivLong:|:</span>strNumLongA:{dataView.longDivLong.strNumLongA} - strNumLongB:{dataView.longDivLong.strNumLongB} = <b>{dataView.longDivLong.strNumLongC} (Ost:{dataView.longDivLong.data.ost},Full:{dataView.longDivLong.data.full})</b></li>
+                <li><span>LongTurnShort:|:</span>strNumLongA:{dataView.longTurnShort.strNumLongA} - strNumLongB:{dataView.longTurnShort.strNumLongB} = <b>{dataView.longTurnShort.strNumLongC}</b></li>
+                <li><ViewLongNumber title="LongTurnShort.strNumLongC" stringNumber={dataView.longTurnShort.strNumLongC} osn={dataView.longTurnShort.osn}/></li>
             </ul>
         </div>
     );
