@@ -9,14 +9,14 @@ import {validateHeaderValue} from "http";
 
 
 
-export function magicMethod(data: IBaseLongNumberData) {
+export function magicMethod(data: IBaseLongNumberData):any {
     let A:number[] = [];
     let B:number[] = [];
     let shortB:number = data.strNumShortB;
     let osn:number = data.osn;
     let sp:number = data.sp;
 
-    data.params.forEach((val,ind,arr) => {
+    data.params.forEach((val,ind,arr):void => {
         switch ( val ) {
             case 'numArrayA':
                 A = ReadLongF(data.strNumLongA, osn)[0];
@@ -30,7 +30,7 @@ export function magicMethod(data: IBaseLongNumberData) {
                 break;
         }
     });
-    let resultFunction:any;
+    let resultFunction:number[] = [];
     switch ( data.nameF ) {
         case 'MulLong':
             resultFunction = MulLong(A,B,osn);
@@ -54,17 +54,5 @@ export function magicMethod(data: IBaseLongNumberData) {
     }else if (data.resultStr == 2) { // [string,LongArray]
         return [WriteLongF(resultFunction,osn),resultFunction];
     }
-
+    return data;
 }
-
-/*
-magicMethod('Foo')
-// { foo: 0, bar: '', baz: true }
-magicMethod('Bar')
-// { foo: 0, bar: '' }
-magicMethod('xxx')
-// { xxx: 0 }
-magicMethod('yyy')
-// { xxx: 0 }
-magicMethod('zzz')
-// Error: Method 'zzz' is not implemented.*/

@@ -17,6 +17,7 @@ import IDataLongMetods from "../../functions/interfase/IDataLongMetods";
 import {magicMethod} from "../../functions/help/magic_method";
 import copyDataLongParamsObj from "../../functions/help/copy_data_long_params_obj";
 import Sub from "../../functions/long_numbers/sub";
+import {DivOstFull, DivOstFull2} from "../../functions/type/DivOstFull";
 
 export default function JustView() {
     const osn = 10000;
@@ -29,7 +30,15 @@ export default function JustView() {
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
     let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
 
-    
+    let divOstFullDefault: DivOstFull = {
+        ost:'',
+        full:'',
+    }
+    let obj:DivOstFull2 = {
+        ost2:'',
+        full2:'',
+    }
+    let allUnionDataAttr:any = {...divOstFullDefault,...obj}
     let baseDefault: IBaseLongNumberData = {
         strNumLongA: '',
         strNumLongB: '',
@@ -43,8 +52,9 @@ export default function JustView() {
         sp: 0,
         params: [],
         resultStr: 0, // 0 - string, 1 - LongArray, 2 - [string,LongArray]
-        data:{}
+        data: allUnionDataAttr//objectsMerge(divOstFullDefault,obj)
     }
+
     let dataDefault: IDataLongMetods = {
         mul: baseDefault,
         mulLong: baseDefault,
@@ -199,7 +209,7 @@ export default function JustView() {
             sp: 0,
             params: ['numArrayA','numArrayB'],
             resultStr: 2,
-            data: {},
+            data:{},
         }
         let res = magicMethod(data);
 
@@ -208,7 +218,10 @@ export default function JustView() {
         setDataView(dataView)
     }
     function long_div_long () {
-
+        let dataDesc: DivOstFull = {
+            ost:'',
+            full:'',
+        }
         let dataHalf = {
             strNumLongA: '564',
             strNumLongB: '63',
@@ -217,29 +230,27 @@ export default function JustView() {
             sp: 0,
             params: ['numArrayA','numArrayB'],
             resultStr: 2,
-            data: {
-                ost: '',
-                full: '',
-            }
+            data:dataDesc//{...allUnionDataAttr}
         }
 
+
         let data = copyDataLongParamsObj(baseDefault,dataHalf);
-
-
         let res = magicMethod(data);
-
         data.strNumLongC = res[0];
 
         let ResOut = MulLong(ReadLongF(data.strNumLongB)[0],res[1],osn);
         let OstOut = Sub(ReadLongF(data.strNumLongA)[0],ResOut,osn);
-        data.data.ost = WriteLongF(OstOut,osn);
-        data.data.full = WriteLongF(ResOut,osn);
+
+        dataHalf.data.ost = WriteLongF(OstOut,osn);
+        dataHalf.data.full = WriteLongF(ResOut,osn);
+
 
         dataView.longDivLong = data;
         setDataView(dataView)
     }
-
-
+    function long_turn_short() {
+        console.log(dataView,'dataView')
+    }
 
     useEffect(()=>{
         let strC = summFunction();
@@ -255,6 +266,7 @@ export default function JustView() {
         mule_long_2();
         sub();
         long_div_long();
+        long_turn_short();
 
     },[]);
 

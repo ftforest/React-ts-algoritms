@@ -1,5 +1,5 @@
 export default interface IBaseLongNumberData {
-    [index: string]: number | number[] | string | string[] | object; // for object fields while
+    [index: string]: number | number[] | string | string[] | object ; // for object fields while
     strNumLongA: string,
     strNumLongB: string,
     strNumLongC: string,
