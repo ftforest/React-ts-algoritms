@@ -22,6 +22,7 @@ import LongTurnShort from "../../functions/long_numbers/long_turn_short";
 import LongModShort from "../../functions/long_numbers/long_mod_short";
 import HowDigits from "../../functions/long_numbers/how_digits";
 import ShortTurnLong from "../../functions/long_numbers/short_turn_long";
+import LongDivShort from "../../functions/long_numbers/long_div_short";
 
 export default function JustView() {
     const osn = 10000;
@@ -298,9 +299,20 @@ export default function JustView() {
         console.log(dataView,'dataView')
     }
     function short_turn_long() {
+        console.log('ShortTurnLong');
         let K = 12304567;
         let A = ShortTurnLong(K,osn);
         console.log(K,A,':K,A');
+    }
+    function long_div_short() {
+        let strA = '120034005600';
+        console.log('LongDivShort');
+        let A:number[] = ReadLongF(strA,osn)[0];
+        let K = 100000;
+        let C = LongDivShort(A,K,osn);
+        console.log(A,K,C,':A,K,C');
+        console.log(strA,'strA')
+        console.log(WriteLongF(C,osn))
     }
 
     useEffect(()=>{
@@ -320,7 +332,8 @@ export default function JustView() {
         long_turn_short();
         long_mod_short();
         how_digits();
-        short_turn_long()
+        short_turn_long();
+        long_div_short();
 
     },[]);
 
