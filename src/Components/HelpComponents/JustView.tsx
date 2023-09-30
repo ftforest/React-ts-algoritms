@@ -21,6 +21,7 @@ import {DivOstFull, DivOstFull2} from "../../functions/type/DivOstFull";
 import LongTurnShort from "../../functions/long_numbers/long_turn_short";
 import LongModShort from "../../functions/long_numbers/long_mod_short";
 import HowDigits from "../../functions/long_numbers/how_digits";
+import ShortTurnLong from "../../functions/long_numbers/short_turn_long";
 
 export default function JustView() {
     const osn = 10000;
@@ -296,6 +297,11 @@ export default function JustView() {
         setDataView(dataView)
         console.log(dataView,'dataView')
     }
+    function short_turn_long() {
+        let K = 12304567;
+        let A = ShortTurnLong(K,osn);
+        console.log(K,A,':K,A');
+    }
 
     useEffect(()=>{
         let strC = summFunction();
@@ -314,6 +320,7 @@ export default function JustView() {
         long_turn_short();
         long_mod_short();
         how_digits();
+        short_turn_long()
 
     },[]);
 
