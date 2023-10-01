@@ -23,6 +23,8 @@ import LongModShort from "../../functions/long_numbers/long_mod_short";
 import HowDigits from "../../functions/long_numbers/how_digits";
 import ShortTurnLong from "../../functions/long_numbers/short_turn_long";
 import LongDivShort from "../../functions/long_numbers/long_div_short";
+import FactorialN from "../../functions/long_numbers/additional_examples/002_n_factorial";
+import GradeN from "../../functions/long_numbers/additional_examples/003_grade_n";
 
 export default function JustView() {
     const osn = 10000;
@@ -314,6 +316,15 @@ export default function JustView() {
         console.log(strA,'strA')
         console.log(WriteLongF(C,osn))
     }
+    //additional examples
+    function factorial_n() {
+        let C = FactorialN(100,osn);
+        console.log(C,'FactorialN')
+    }
+    function grade_n() {
+        let C = GradeN(3,100,osn);
+        console.log(C,'GradeN')
+    }
 
     useEffect(()=>{
         let strC = summFunction();
@@ -334,6 +345,8 @@ export default function JustView() {
         how_digits();
         short_turn_long();
         long_div_short();
+        factorial_n();
+        grade_n();
 
     },[]);
 
