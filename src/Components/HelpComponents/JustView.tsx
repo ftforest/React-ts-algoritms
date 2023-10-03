@@ -18,17 +18,15 @@ import {magicMethod} from "../../functions/help/magic_method";
 import copyDataLongParamsObj from "../../functions/help/copy_data_long_params_obj";
 import Sub from "../../functions/long_numbers/sub";
 import {DivOstFull, DivOstFull2} from "../../functions/type/DivOstFull";
-import LongTurnShort from "../../functions/long_numbers/long_turn_short";
-import LongModShort from "../../functions/long_numbers/long_mod_short";
-import HowDigits from "../../functions/long_numbers/how_digits";
 import ShortTurnLong from "../../functions/long_numbers/short_turn_long";
 import LongDivShort from "../../functions/long_numbers/long_div_short";
 import FactorialN from "../../functions/long_numbers/additional_examples/002_n_factorial";
 import GradeN from "../../functions/long_numbers/additional_examples/003_grade_n";
+import LinkedList from "../../functions/help/linked_list";
 
 export default function JustView() {
     const osn = 10000;
-    let [stringC,setStringC] = useState<string>();
+    let [strstrC,setstrstrC] = useState<string>();
     let [arrayC,setArrayC] = useState<number[]>([]);
     let [varEq,setVarEq] = useState<boolean>(false);
     let [varMore,setVarMore] = useState<boolean>(false);
@@ -87,11 +85,11 @@ export default function JustView() {
 
     function summFunction() {
         let arrA = ReadLongF(strA,osn)[0];
-        ;
+
         let arrB = ReadLongF(strB,osn)[0];
-        ;
+
         let arrC = SumLongTwoF(arrA,arrB,osn);
-        ;
+
         let arr:any[] = [arrA,arrB,arrC];
         setArrayC(arr);
         const resultStrC = WriteLongF(arrC,osn);
@@ -326,9 +324,17 @@ export default function JustView() {
         console.log(C,'GradeN')
     }
 
+    function linked_list() {
+        let list = new LinkedList<string>();
+        list.insertAtEnd('111111');
+        list.insertAtEnd('222222')
+        list.insertInBegin('000000')
+        console.log(list.traverse(),'list')
+    }
+
     useEffect(()=>{
         let strC = summFunction();
-        setStringC(strC);
+        setstrstrC(strC);
         eq();
         more();
         less();
@@ -347,6 +353,7 @@ export default function JustView() {
         long_div_short();
         factorial_n();
         grade_n();
+        linked_list();
 
     },[]);
 
@@ -356,8 +363,8 @@ export default function JustView() {
                 <li>strA: {strA}</li>
                 <li>strB: {strB}</li>
                 <li>strC: {strC}</li>
-                <li>strR: {stringC}</li>
-                <li>strC == resultStrC: {strC == stringC}</li>
+                <li>strR: {strstrC}</li>
+                <li>strC == resultStrC: {strC === strstrC}</li>
                 <li><ListDebugLongNumbers list={arrayC}/></li>
                 <li>strEqA: {strEqA}</li>
                 <li>strEqB: {strEqB}</li>
