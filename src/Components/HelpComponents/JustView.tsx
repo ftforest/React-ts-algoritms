@@ -20,9 +20,13 @@ import Sub from "../../functions/long_numbers/sub";
 import {DivOstFull, DivOstFull2} from "../../functions/type/DivOstFull";
 import ShortTurnLong from "../../functions/long_numbers/short_turn_long";
 import LongDivShort from "../../functions/long_numbers/long_div_short";
-import FactorialN from "../../functions/long_numbers/additional_examples/002_n_factorial";
+import Fac from "../../functions/long_numbers/additional_examples/002_n_factorial";
 import GradeN from "../../functions/long_numbers/additional_examples/003_grade_n";
 import LinkedList from "../../functions/help/linked_list";
+import LongDivLong from "../../functions/long_numbers/long_div_long";
+import Permutations from "../../functions/combinatorics/permutations";
+import Placements from "../../functions/combinatorics/placements";
+import Combinations from "../../functions/combinatorics/combinations";
 
 export default function JustView() {
     const osn = 10000;
@@ -316,8 +320,8 @@ export default function JustView() {
     }
     //additional examples
     function factorial_n() {
-        let C = FactorialN(100,osn);
-        console.log(C,'FactorialN')
+        let C = Fac(100,osn);
+        console.log(C,'Fac')
     }
     function grade_n() {
         let C = GradeN(3,100,osn);
@@ -330,6 +334,29 @@ export default function JustView() {
         list.insertAtEnd('222222')
         list.insertInBegin('000000')
         console.log(list.traverse(),'list')
+    }
+    
+    function permutations() {
+        let N:number = 4;
+        let C:number[] = Permutations(N,osn);
+        let strC = WriteLongF(C,osn);
+        console.log('permutations',strC)
+    }
+    function placements() {
+        let M:number = 2;
+        let N:number = 4;
+        let C:number[] = [0];
+        C = Placements(M,N,osn)
+        let strC = WriteLongF(C,osn);
+        console.log('placements',strC)
+    }
+    function combinations() {
+        let M:number = 2;
+        let N:number = 4;
+        let C:number[] = [0];
+        C = Combinations(M,N,osn);
+        let strC = WriteLongF(C,osn);
+        console.log('combinations',strC)
     }
 
     useEffect(()=>{
@@ -354,6 +381,10 @@ export default function JustView() {
         factorial_n();
         grade_n();
         linked_list();
+        //combinatorica
+        permutations();
+        placements();
+        combinations();
 
     },[]);
 
