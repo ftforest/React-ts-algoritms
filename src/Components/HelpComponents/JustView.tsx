@@ -27,6 +27,7 @@ import LongDivLong from "../../functions/long_numbers/long_div_long";
 import Permutations from "../../functions/combinatorics/permutations";
 import Placements from "../../functions/combinatorics/placements";
 import Combinations from "../../functions/combinatorics/combinations";
+import {algoritmSolve} from "../../functions/combinatorics/solve";
 
 export default function JustView() {
     const osn = 10000;
@@ -296,36 +297,36 @@ export default function JustView() {
         let data = copyDataLongParamsObj(baseDefault,dataHalf);
         let res = magicMethod(data);
         data.strNumLongC = res[0];
-        console.log(res[0],res[1],'res[0],res[1]')
+        
 
         dataView.howDigits = data;
         setDataView(dataView)
-        console.log(dataView,'dataView')
+        
     }
     function short_turn_long() {
-        console.log('ShortTurnLong');
+        
         let K = 12304567;
         let A = ShortTurnLong(K,osn);
-        console.log(K,A,':K,A');
+        
     }
     function long_div_short() {
         let strA = '120034005600';
-        console.log('LongDivShort');
+        
         let A:number[] = ReadLongF(strA,osn)[0];
         let K = 100000;
         let C = LongDivShort(A,K,osn);
-        console.log(A,K,C,':A,K,C');
-        console.log(strA,'strA')
-        console.log(WriteLongF(C,osn))
+        
+        
+        
     }
     //additional examples
     function factorial_n() {
         let C = Fac(100,osn);
-        console.log(C,'Fac')
+        
     }
     function grade_n() {
         let C = GradeN(3,100,osn);
-        console.log(C,'GradeN')
+        
     }
 
     function linked_list() {
@@ -333,14 +334,14 @@ export default function JustView() {
         list.insertAtEnd('111111');
         list.insertAtEnd('222222')
         list.insertInBegin('000000')
-        console.log(list.traverse(),'list')
+        
     }
     
     function permutations() {
         let N:number = 4;
         let C:number[] = Permutations(N,osn);
         let strC = WriteLongF(C,osn);
-        console.log('permutations',strC)
+        
     }
     function placements() {
         let M:number = 2;
@@ -348,7 +349,7 @@ export default function JustView() {
         let C:number[] = [0];
         C = Placements(M,N,osn)
         let strC = WriteLongF(C,osn);
-        console.log('placements',strC)
+        
     }
     function combinations() {
         let M:number = 2;
@@ -356,7 +357,11 @@ export default function JustView() {
         let C:number[] = [0];
         C = Combinations(M,N,osn);
         let strC = WriteLongF(C,osn);
-        console.log('combinations',strC)
+        
+    }
+
+    function permutations_3_task() {
+        algoritmSolve();
     }
 
     useEffect(()=>{
@@ -385,6 +390,7 @@ export default function JustView() {
         permutations();
         placements();
         combinations();
+        permutations_3_task();
 
     },[]);
 
