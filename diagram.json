@@ -1,0 +1,103 @@
+{
+  "blocks": [
+    {
+      "x": 680,
+      "y": 60,
+      "text": "начало",
+      "width": 100,
+      "height": 30,
+      "type": "Начало / конец",
+      "isMenuBlock": false,
+      "fontSize": 14,
+      "textHeight": 14,
+      "isBold": false,
+      "isItalic": false,
+      "textAlign": "center",
+      "labelsPosition": 1
+    },
+    {
+      "x": 680,
+      "y": 160,
+      "text": "const Nmax:number = 4;\n     let P:number[] = [0,0,0,0,0]\r\n    let Y:number[] = [0,0,0,0,0]\r\n    let D:number[] = [0,0,0,0,0]",
+      "width": 240,
+      "height": 80,
+      "type": "Ввод / вывод",
+      "isMenuBlock": false,
+      "fontSize": 14,
+      "textHeight": 14,
+      "isBold": false,
+      "isItalic": false,
+      "textAlign": "center",
+      "labelsPosition": 1
+    },
+    {
+      "x": 680,
+      "y": 280,
+      "text": "First(Nmax,P,Y,D)",
+      "width": 180,
+      "height": 40,
+      "type": "Подпрограмма",
+      "isMenuBlock": false,
+      "fontSize": 14,
+      "textHeight": 14,
+      "isBold": false,
+      "isItalic": false,
+      "textAlign": "center",
+      "labelsPosition": 1
+    }
+  ],
+  "arrows": [
+    {
+      "startIndex": 1,
+      "endIndex": 2,
+      "startConnectorIndex": 2,
+      "endConnectorIndex": 0,
+      "nodes": [
+        {
+          "x": 680,
+          "y": 200
+        },
+        {
+          "x": 680,
+          "y": 240
+        },
+        {
+          "x": 680,
+          "y": 260
+        }
+      ],
+      "counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "startIndex": 0,
+      "endIndex": 1,
+      "startConnectorIndex": 2,
+      "endConnectorIndex": 0,
+      "nodes": [
+        {
+          "x": 680,
+          "y": 75
+        },
+        {
+          "x": 680,
+          "y": 100
+        },
+        {
+          "x": 680,
+          "y": 120
+        }
+      ],
+      "counts": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "x0": 0,
+  "y0": 0
+}

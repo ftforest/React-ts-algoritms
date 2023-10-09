@@ -1,7 +1,6 @@
 import React from 'react';
 import GetNext, {GetNextTest} from "../functions/combinatorics/get_next";
 import Eq from "../functions/long_numbers/eg";
-import {algoritmSolve} from "../functions/combinatorics/solve";
 
 test('Combinatorics functions GetNextTest', () => {
     //GetNextTest();
@@ -30,7 +29,7 @@ test('Combinatorics functions GetNext All Steps', () => {
         items[i] = item;
         i++;
     }
-    //console.log(items,'items')
+    
     expect(items).toEqual([
         [ 3, 1, 3, 2 ], // 231
         [ 3, 2, 1, 3 ], // 312
@@ -41,7 +40,7 @@ test('Combinatorics functions GetNext All Steps', () => {
 });
 test('Combinatorics functions Solve Test', () => {
     //Solve.First
-    algoritmSolve();
+    //algoritmSolve();
     expect([]).toEqual([]);
 });
 

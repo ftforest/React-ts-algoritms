@@ -1,24 +1,24 @@
 import {Print} from "../help/print";
 import {Swap} from "./swap";
 
-function First(N:number,P:number[],Y:number[],D:number[]) {
+export function First(N:number,P:number[],Y:number[],D:number[]) {
     let i:number
     for (i = 1;i <= N;i++) {
         P[i] = N-i+1
         Y[i] = 0
         D[i] = 1
     }
-    console.log(P,Y,D,'P,Y,D First')
+    
 }
 
-function Ok(N:number,Y:number[],D:number[]):number {
+export function Ok(N:number,Y:number[],D:number[]):number {
     let i:number
     i = N
     while(i > 1 && ((D[i] == 1 &&  Y[i] == (i - 1)) || (D[i] == -1 && Y[i] == 0))) i--
     return i;
 }
 
-export function algoritmSolve():void {
+/*export function algoritmSolve():void {
     const Nmax:number = 4;
     let P:number[] = [0,0,0,0,0]
     let Y:number[] = [0,0,0,0,0]
@@ -27,12 +27,12 @@ export function algoritmSolve():void {
     let historyY:any = []
     let historyD:any = []
     First(Nmax,P,Y,D)
-    console.log(P,Y,D,'P,Y,D First Next')
+    
     let pp:boolean = true
-    Solve(pp,Nmax,P,Y,D)
+    //Solve(pp,Nmax,P,Y,D)
     let i = 0;
-    while (i < 4) {
-        console.log(i,'i while')
+    while (i < 5) {
+        
         Solve(pp,Nmax,P,Y,D)
 
         historyP.push([...P])
@@ -42,13 +42,13 @@ export function algoritmSolve():void {
         //break;
         //if (pp) Print(P)
     }
-    console.log(historyP,historyY,historyD,'history P - Y - D')
-}
+    
+}*/
 
 export function Solve(q:boolean,N:number,P:number[],Y:number[],D:number[]) {
     let i:number,j:number,dj:number;
     i = Ok(N,Y,D)
-    console.log(i,'i Ok')
+    
     q = Boolean(i > 1)
     if (i > 1) {
         Y[i] = Y[i] + D[i]
@@ -59,7 +59,7 @@ export function Solve(q:boolean,N:number,P:number[],Y:number[],D:number[]) {
         P[j] = abObjVar.a
         P[dj] = abObjVar.b
     }
-    //console.log(P,Y,D,'P,Y,D')
+    
     return P;
 }
 

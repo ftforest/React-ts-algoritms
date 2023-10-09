@@ -28,11 +28,11 @@ export function GetNextTest() {
     let N:number = 3;
     //Print(P);
     while (!Eq(P,Last,osn)) {
-        //console.log(!Eq(P,Last,osn),'!Eq(P,Last,osn)')
+        
         if (Last[0] == undefined) Last = [...P];
         Last = GetNext(Last,N);
         Print(Last,'Last');
-        //console.log(P,'P')
-        //console.log(Last,'Last')
+        
+        
     }
 }

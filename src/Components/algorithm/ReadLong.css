@@ -11,3 +11,47 @@
 .ul-view-result > li > span {
     color: #ffd200;
 }
+.ladder-grid {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.ladder-container{
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #4c575b;
+    padding: 15px;
+}
+.ladder-container_view.bg .ladder-section{
+    background: #fcf3f3;
+}
+.ladder-container_placements.bg .ladder-section{
+    background: #efedb4;
+}
+.ladder-container_direction.bg .ladder-section{
+    background: #c0e5e1;
+}
+.ladder-container_number.bg .ladder-section{
+    background: #ce9bd9;
+}
+
+.ladder-container_view,
+.ladder-container_placements,
+.ladder-container_direction,
+.ladder-container_number{
+    display: flex;
+}
+
+.ladder-row {
+    display: flex;
+    flex-direction: column-reverse;
+}
+.ladder-section {
+    border: 1px solid #61dafb;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

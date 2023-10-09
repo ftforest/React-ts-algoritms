@@ -27,10 +27,12 @@ import LongDivLong from "../../functions/long_numbers/long_div_long";
 import Permutations from "../../functions/combinatorics/permutations";
 import Placements from "../../functions/combinatorics/placements";
 import Combinations from "../../functions/combinatorics/combinations";
-import {algoritmSolve} from "../../functions/combinatorics/solve";
+import {First, Solve} from "../../functions/combinatorics/solve";
+import LadderPermutation, {ListLadderPermutation} from "./LadderPermutation";
 
 export default function JustView() {
     const osn = 10000;
+    const defComb = [[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
     let [strstrC,setstrstrC] = useState<string>();
     let [arrayC,setArrayC] = useState<number[]>([]);
     let [varEq,setVarEq] = useState<boolean>(false);
@@ -39,6 +41,7 @@ export default function JustView() {
     let [varLess,setVarLess] = useState<boolean>(false);
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
     let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
+    let [varAlgoritmSolve,setAlgoritmSolve] = useState<any>([[...defComb],[...defComb],[...defComb]]);
 
     let divOstFullDefault: DivOstFull = {
         ost:'',
@@ -361,7 +364,34 @@ export default function JustView() {
     }
 
     function permutations_3_task() {
-        algoritmSolve();
+
+            const Nmax:number = 4;
+            let P:number[] = [0,2,1,3,4]
+            let Y:number[] = [0,0,0,2,3]
+            let D:number[] = [0,1,1,1,1] // 1,1,1,1,1
+            let historyP:any = []
+            let historyY:any = []
+            let historyD:any = []
+            //First(Nmax,P,Y,D)
+            historyP.push([...P])
+            historyY.push([...Y])
+            historyD.push([...D])
+            let pp:boolean = true
+            //Solve(pp,Nmax,P,Y,D)
+            let i = 0;
+            while (i < 9) {
+                
+                Solve(pp,Nmax,P,Y,D)
+
+                historyP.push([...P])
+                historyY.push([...Y])
+                historyD.push([...D])
+                i++;
+                //break;
+                //if (pp) Print(P)
+            }
+            console.log([historyP,historyY,historyD],'[historyP,historyY,historyD]')
+            setAlgoritmSolve([historyP,historyY,historyD])
     }
 
     useEffect(()=>{
@@ -430,6 +460,12 @@ export default function JustView() {
                 <li><span>LongDivLong:|:</span>strNumLongA:{dataView.longDivLong.strNumLongA} - strNumLongB:{dataView.longDivLong.strNumLongB} = <b>{dataView.longDivLong.strNumLongC} (Ost:{dataView.longDivLong.data.ost},Full:{dataView.longDivLong.data.full})</b></li>
                 <li><span>LongTurnShort:|:</span>strNumLongA:{dataView.longTurnShort.strNumLongA} - strNumLongB:{dataView.longTurnShort.strNumLongB} = <b>{dataView.longTurnShort.strNumLongC}</b></li>
                 <li><ViewLongNumber title="LongTurnShort.strNumLongC" stringNumber={dataView.longTurnShort.strNumLongC} osn={dataView.longTurnShort.osn}/></li>
+                <li>
+                    <ListLadderPermutation permutations={varAlgoritmSolve}/>
+                    {/*<LadderPermutation checkers={varAlgoritmSolve[1]} directions={varAlgoritmSolve[2]}/>
+                    <LadderPermutation checkers={varAlgoritmSolve[1]} directions={varAlgoritmSolve[2]}/>
+                    <LadderPermutation checkers={varAlgoritmSolve[1]} directions={varAlgoritmSolve[2]}/>*/}
+                </li>
             </ul>
         </div>
     );
