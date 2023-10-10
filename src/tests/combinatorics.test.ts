@@ -1,6 +1,7 @@
 import React from 'react';
-import GetNext, {GetNextTest} from "../functions/combinatorics/get_next";
+import GetNext, {GetNextLexicoGraficeski, GetNextTest} from "../functions/combinatorics/get_next";
 import Eq from "../functions/long_numbers/eg";
+import RevertArray from "../functions/help/revert_array";
 
 test('Combinatorics functions GetNextTest', () => {
     //GetNextTest();
@@ -37,6 +38,45 @@ test('Combinatorics functions GetNext All Steps', () => {
         [ 3, 3, 1, 2 ], // 213
         [ 3, 3, 2, 1 ]  // 123
     ]);
+});
+test('Combinatorics functions GetNext Anti Lexicograficheski', () => {
+    let P:number[] = [4,3,2,1];
+    let Last:number[] = [];
+    let items:number[][] = [];
+    let osn:number = 10;
+    let N:number = 3;
+    let i:number = 0;
+    while (!Eq(P,Last,osn)) {
+        if (Last[0] == undefined) Last = [...P];
+        let item = GetNext(Last,N);
+        Last = item;
+        item = RevertArray(item);
+        items[i] = [...item];
+        i++;
+    }
+    console.log(items,'items')
+
+    expect([]).toEqual([]);
+});
+test('Combinatorics functions GetNext Lexicograficheski', () => {
+    let P:number[] = [4,3,2,1];
+    let Last:number[] = [];
+    let items:number[][] = [];
+    let osn:number = 10;
+    let N:number = 3;
+    let i:number = 0;
+    while (!Eq(P,Last,osn)) {
+        if (Last[0] == undefined) Last = [...P];
+        let item = GetNextLexicoGraficeski(Last,N);
+        Last = item;
+        item = RevertArray(item);
+        items[i] = [...item];
+        i++;
+        break
+    }
+    console.log(items,'items')
+
+    expect([]).toEqual([]);
 });
 test('Combinatorics functions Solve Test', () => {
     //Solve.First
