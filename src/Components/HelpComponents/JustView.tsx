@@ -42,6 +42,7 @@ export default function JustView() {
     let [varLessEq,setVarLessEq] = useState<boolean>(false);
     let [varMoreSdvig,setVarMoreSdvig] = useState<number>();
     let [varAlgoritmSolve,setAlgoritmSolve] = useState<any>([[...defComb],[...defComb],[...defComb]]);
+    let [animationArray, setAnimationArray] = useState([]);
 
     let divOstFullDefault: DivOstFull = {
         ost:'',
@@ -398,6 +399,7 @@ export default function JustView() {
         }
         console.log([historyP,historyY,historyD],'[historyP,historyY,historyD]')
         setAlgoritmSolve([historyP,historyY,historyD])
+
     }
 
     useEffect(()=>{
@@ -430,9 +432,29 @@ export default function JustView() {
 
     },[]);
 
+    const [seconds, setSeconds] = useState([[],[],[]]);
+    const [i, setI] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            console.log(varAlgoritmSolve[0][i],'varAlgoritmSolve[0]['+i+']')
+            setSeconds([varAlgoritmSolve[0][i],varAlgoritmSolve[1][i],varAlgoritmSolve[2][i]]);
+            if (i >= varAlgoritmSolve[0].length) {
+                setSeconds([varAlgoritmSolve[0][0],varAlgoritmSolve[1][0],varAlgoritmSolve[2][0]]);
+                clearInterval(timer);
+            }
+            setI(i + 1)
+        }, 1000);
+        // clearing interval
+        return () => clearInterval(timer);
+    });
+
     return (
         <div>
             <ul className="ul-view-result">
+                <li><LadderPermutation permutetion={seconds[0]} checkers={seconds[1]} directions={seconds[2]}/></li>
+                <li>{/*<ListLadderPermutation permutations={seconds}/>*/}</li>
+                <li>seconds: {seconds}</li>
                 <li>strA: {strA}</li>
                 <li>strB: {strB}</li>
                 <li>strC: {strC}</li>

@@ -97,7 +97,6 @@ function LadderRow({ index,value,direction } : { index:number,value: number,dire
 
 }
 export function ListLadderPermutation({ permutations } : { permutations: any[][]}) {
-    console.log(permutations[1][0],'permutations[1][index]')
     let P:number[][] = permutations[0]
     let Y:number[][] = permutations[1]
     let D:number[][] = permutations[2]
