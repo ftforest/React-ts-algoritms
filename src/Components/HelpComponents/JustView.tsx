@@ -365,33 +365,39 @@ export default function JustView() {
 
     function permutations_3_task() {
 
-            const Nmax:number = 4;
-            let P:number[] = [0,2,1,3,4]
-            let Y:number[] = [0,0,0,2,3]
-            let D:number[] = [0,1,1,1,1] // 1,1,1,1,1
-            let historyP:any = []
-            let historyY:any = []
-            let historyD:any = []
-            //First(Nmax,P,Y,D)
-            historyP.push([...P])
-            historyY.push([...Y])
-            historyD.push([...D])
-            let pp:boolean = true
-            //Solve(pp,Nmax,P,Y,D)
-            let i = 0;
-            while (i < 9) {
-                
-                Solve(pp,Nmax,P,Y,D)
+        const Nmax:number = 4;
+        let P:number[] = [0]
+        let Y:number[] = [0]
+        let D:number[] = [0] // 1,1,1,1,1
+        for (let i = 0;i < Nmax;i++) {
+            P.push(0);Y.push(0);D.push(0);
+        }
 
+        let historyP:any = []
+        let historyY:any = []
+        let historyD:any = []
+        First(Nmax,P,Y,D)
+        historyP.push([...P])
+        historyY.push([...Y])
+        historyD.push([...D])
+        let pp:boolean = true
+        //Solve(pp,Nmax,P,Y,D)
+        let i = 0;
+        while (pp) {
+
+            pp = Solve(pp,Nmax,P,Y,D)
+            if(pp) {
                 historyP.push([...P])
                 historyY.push([...Y])
                 historyD.push([...D])
-                i++;
-                //break;
-                //if (pp) Print(P)
             }
-            console.log([historyP,historyY,historyD],'[historyP,historyY,historyD]')
-            setAlgoritmSolve([historyP,historyY,historyD])
+            if (i > 30) break;
+            i++;
+            //break;
+            //if (pp) Print(P)
+        }
+        console.log([historyP,historyY,historyD],'[historyP,historyY,historyD]')
+        setAlgoritmSolve([historyP,historyY,historyD])
     }
 
     useEffect(()=>{

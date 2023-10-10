@@ -52,7 +52,7 @@ export function Solve(q:boolean,N:number,P:number[],Y:number[],D:number[]) {
     q = Boolean(i > 1)
     if (i > 1) {
         Y[i] = Y[i] + D[i]
-        for(j = i+1;j < N;j++) D[j] *= -1
+        for(j = i+1;j <= N;j++) D[j] *= -1
         j = Who_i(N,P,i);
         dj = j + D[i];
         let abObjVar = Swap(P[j],P[dj])
@@ -60,7 +60,7 @@ export function Solve(q:boolean,N:number,P:number[],Y:number[],D:number[]) {
         P[dj] = abObjVar.b
     }
     
-    return P;
+    return q;
 }
 
 function Who_i(N:number,P:number[],i:number):number {
