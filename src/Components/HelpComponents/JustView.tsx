@@ -443,11 +443,11 @@ export default function JustView() {
                 setSeconds([varAlgoritmSolve[0][0],varAlgoritmSolve[1][0],varAlgoritmSolve[2][0]]);
                 clearInterval(timer);
             }
-            setI(i + 1)
-        }, 1000);
+            if (i <= varAlgoritmSolve[0].length) setI(i + 1)
+        }, 100);
         // clearing interval
         return () => clearInterval(timer);
-    });
+    },[i]);
 
     return (
         <div>
