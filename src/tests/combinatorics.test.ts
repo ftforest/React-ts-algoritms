@@ -2,6 +2,12 @@ import React from 'react';
 import GetNext, {GetNextLexicoGraficeski, GetNextTest} from "../functions/combinatorics/get_next";
 import Eq from "../functions/long_numbers/eg";
 import RevertArray from "../functions/help/revert_array";
+import FactorialInArray, {
+    FactorialApproximate,
+    FactorialApproximateLong,
+    FactorialRecursia
+} from "../functions/help/factorial_in_array";
+import GetPByNum, {GetPByNumTest} from "../functions/combinatorics/get_p_by_num";
 
 test('Combinatorics functions GetNextTest', () => {
     //GetNextTest();
@@ -78,9 +84,46 @@ test('Combinatorics functions GetNext Lexicograficheski', () => {
 
     expect([]).toEqual([]);
 });
-test('Combinatorics functions Solve Test', () => {
-    //Solve.First
-    //algoritmSolve();
-    expect([]).toEqual([]);
+test('Combinatorics functions FactorialInArray', () => {
+
+    expect(FactorialInArray(0)).toEqual([1]);
+    expect(FactorialInArray(1)).toEqual([1,1]);
+    expect(FactorialInArray(2)).toEqual([1,1,2]);
+    expect(FactorialInArray(3)).toEqual([1,1,2,6]);
+    expect(FactorialInArray(4)).toEqual([1,1,2,6,24]);
+    expect(FactorialInArray(5)).toEqual([1,1,2,6,24,120]);
+    expect(FactorialInArray(12)).toEqual([1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800,479001600]);
 });
 
+test('Combinatorics functions FactorialRecursia', () => {
+
+    expect(FactorialRecursia(0)).toBe(1);
+    expect(FactorialRecursia(1)).toBe(1);
+    expect(FactorialRecursia(2)).toBe(2);
+    expect(FactorialRecursia(3)).toBe(6);
+    expect(FactorialRecursia(4)).toBe(24);
+    expect(FactorialRecursia(5)).toBe(120);
+    expect(FactorialRecursia(12)).toBe(479001600);
+});
+test('Combinatorics functions FactorialApproximate', () => {
+
+    /*console.log(FactorialApproximate(2))
+    console.log(FactorialApproximate(3))
+    console.log(FactorialApproximate(4))
+    console.log(FactorialApproximate(5))
+    console.log(FactorialApproximate(6))
+    console.log(FactorialApproximateLong(10024))*/
+
+    /*expect(FactorialRecursia(0)).toBe(1);
+    expect(FactorialRecursia(1)).toBe(1);
+    expect(FactorialRecursia(2)).toBe(2);
+    expect(FactorialRecursia(3)).toBe(6);
+    expect(FactorialRecursia(4)).toBe(24);
+    expect(FactorialRecursia(5)).toBe(120);
+    expect(FactorialRecursia(12)).toBe(479001600);*/
+});
+test('Combinatorics functions GetPByNum', () => {
+    //GetPByNumTest();
+    let P = GetPByNum()
+    expect(P).toEqual([8, 3, 4, 5, 6, 1, 7, 2]);
+})
