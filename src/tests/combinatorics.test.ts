@@ -124,6 +124,7 @@ test('Combinatorics functions FactorialApproximate', () => {
 });
 test('Combinatorics functions GetPByNum', () => {
     //GetPByNumTest();
-    let P = GetPByNum()
-    expect(P).toEqual([8, 3, 4, 5, 6, 1, 7, 2]);
+    let L:number = 37021
+    let P:number[] = GetPByNum(L)
+    expect(P).toEqual([8, 3, 4, 5, 6, 1, 7, 2])
 })

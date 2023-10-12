@@ -1,6 +1,6 @@
 import Div from "../help/div";
 
-export default function GetPByNum() {
+export default function GetPByNum(L:number) {
     let debug:boolean = false
     let Nsmall = 12
     let ResSm:number[] = [1,1,2,6,24,120,720,5040,40320,362880,3628800,39916800,479001600]
@@ -8,7 +8,7 @@ export default function GetPByNum() {
     let N = 8
     let ws:number[] = []
     let j:number,sc:number
-    let L = 37021
+    //let L = 37021
     let P:number[] = [0]
 
     for (let i = 1;i <= N;i++) {
@@ -33,6 +33,6 @@ export default function GetPByNum() {
 }
 
 export function GetPByNumTest() {
-    let P:number[] = GetPByNum()
+    let P:number[] = GetPByNum(37021)
     //console.log(P,'P')
 }
