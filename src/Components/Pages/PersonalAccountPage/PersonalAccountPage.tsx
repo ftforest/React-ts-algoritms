@@ -1,14 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Form, useLoaderData } from "react-router-dom";
-import { getContact } from "../contacts";
+import {Form, useFetcher, useLoaderData} from "react-router-dom";
+import { getContact, updateContact } from "../contacts";
 
-PersonalAccountPage.propTypes = {
-    
-};
+export async function action({ request, params }:{ request:any, params:any }) {
+    let formData = await request.formData();
+    return updateContact(params.contactId, {
+        favorite: formData.get("favorite") === "true",
+    });
+}
 
 export async function loader({ params }:{params:any}) {
     const contact = await getContact(params.contactId);
+    if (!contact) {
+        throw new Response("", {
+            status: 404,
+            statusText: "Not Found",
+        });
+    }
     return { contact };
 }
 
@@ -82,9 +90,14 @@ function PersonalAccountPage(props:any) {
 
 function Favorite({ contact }:{contact:any}) {
     // yes, this is a `let` for later
+    const fetcher = useFetcher();
     let favorite = contact.favorite;
+    if (fetcher.formData) {
+        favorite = fetcher.formData.get("favorite") === "true";
+    }
+
     return (
-        <Form method="post">
+        <fetcher.Form method="post">
             <button
                 name="favorite"
                 value={favorite ? "false" : "true"}
@@ -96,7 +109,7 @@ function Favorite({ contact }:{contact:any}) {
             >
                 {favorite ? "★" : "☆"}
             </button>
-        </Form>
+        </fetcher.Form>
     );
 }
 

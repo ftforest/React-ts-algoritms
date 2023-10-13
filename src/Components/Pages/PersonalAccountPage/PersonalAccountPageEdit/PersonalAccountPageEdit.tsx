@@ -1,16 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Form, useLoaderData } from "react-router-dom";
-
-PersonalAccountPageEdit.propTypes = {
-
-};
+import {Form, redirect, useLoaderData, useNavigate} from "react-router-dom";
+import { updateContact } from "../../contacts";
 
 
+export async function action({ request, params }:{ request:any, params:any }) {
+    const formData = await request.formData();
+    const updates = Object.fromEntries(formData);
+    await updateContact(params.contactId, updates);
+    return redirect(`/contacts/${params.contactId}`);
+}
 
 function PersonalAccountPageEdit(props:any) {
     const obj:any = useLoaderData();
     const  contact:any  = obj.contact;
+    const navigate = useNavigate();
     return (
         <Form method="post" id="contact-form">
             <p>
@@ -59,7 +62,12 @@ function PersonalAccountPageEdit(props:any) {
             </label>
             <p>
                 <button type="submit">Save</button>
-                <button type="button">Cancel</button>
+                <button
+                    type="button"
+                    onClick={() => {
+                        navigate(-1);
+                    }}
+                >Cancel</button>
             </p>
         </Form>
     );
