@@ -5,6 +5,9 @@ import ReadLong from "./Components/algorithm/ReadLong";
 import WriteLong from "./Components/algorithm/WriteLong";
 import ReadLongF from "./functions/long_numbers/read_long";
 import JustView from "./Components/HelpComponents/JustView";
+import TodoList from "./Components/Prodjects/TodoList/TodoList";
+import {Provider} from "react-redux";
+import {store} from "./Components/Prodjects/TodoList/store";
 
 function App() {
     const stringDefaultNamber = "12034567899";
@@ -33,6 +36,9 @@ function App() {
       <ReadLong parentCallback={handleCallback} stringNumber={stringDefaultNamber}/>
       <WriteLong longNumber={numInArray}/>
         <JustView/>
+        <Provider store={store}>
+            <TodoList />
+        </Provider>
     </div>
   );
 }
