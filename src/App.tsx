@@ -8,6 +8,10 @@ import JustView from "./Components/HelpComponents/JustView";
 import TodoList from "./Components/Prodjects/TodoList/TodoList";
 import {Provider} from "react-redux";
 import {store} from "./Components/Prodjects/TodoList/store";
+import CounterIndex from "./Components/Prodjects/redux/examples/counter/CounterIndex";
+import AsyncIndex from "./Components/Prodjects/redux/examples/async/AsyncIndex";
+import CounterTsIndex from "./Components/Prodjects/redux/examples/counter-ts/CounterTsIndex";
+import RealWorldIndex from "./Components/Prodjects/redux/examples/real-world/RealWorldIndex";
 
 function App() {
     const stringDefaultNamber = "12034567899";
@@ -33,12 +37,13 @@ function App() {
         </a>
       </header>
         <h1> </h1>
-      <ReadLong parentCallback={handleCallback} stringNumber={stringDefaultNamber}/>
-      <WriteLong longNumber={numInArray}/>
+        <ReadLong parentCallback={handleCallback} stringNumber={stringDefaultNamber}/>
+        <WriteLong longNumber={numInArray}/>
         <JustView/>
-        <Provider store={store}>
-            <TodoList />
-        </Provider>
+        <CounterIndex />
+        <AsyncIndex />
+        <CounterTsIndex />
+        <RealWorldIndex />
     </div>
   );
 }
